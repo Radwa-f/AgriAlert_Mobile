@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.teal_700)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
 
         val logo: ImageView = findViewById(R.id.logo)
 

@@ -1,0 +1,109 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="16dp"
+    android:layout_marginTop="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Section: User Preferences -->
+        <TextView
+            android:id="@+id/tv_user_preferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Preferences"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingVertical="8dp"
+            android:textColor="@color/black" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_profile"
+                    android:contentDescription="Edit Profile Icon" />
+
+                <TextView
+                    android:id="@+id/tv_edit_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Edit Profile"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:contentDescription="Arrow Icon" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Section: Notifications -->
+        <TextView
+            android:id="@+id/tv_notifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingVertical="8dp"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:background="@drawable/rounded_background">
+
+            <TextView
+                android:id="@+id/tv_weather_updates"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Weather Updates"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_weather_updates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true" />
+
+        </LinearLayout>
+
+        <!-- Section: Logout -->
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/nav"
+            android:text="Logout"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+</ScrollView>

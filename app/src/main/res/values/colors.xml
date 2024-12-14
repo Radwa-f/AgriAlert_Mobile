@@ -12,7 +12,7 @@
     <color name="blue">#3282B8</color>
     <color name="royal_blue">#002549</color>
     <color name="deep_sky_blue">#1E90FF</color>
-    <color name="grey_white">#cccccc</color>
+    <color name="grey_white">#FFFFFFFF</color>
     <color name="grey_black">#2c2c2c</color>
     <color name="black_for_bg">#171717</color>
     <color name="shimmer_bg_color">#dddddd</color>
@@ -20,11 +20,12 @@
 
         <color name="purple_80">#BB86FC</color>
         <color name="purple_grey_80">#6200EE</color>
-        <color name="pink_80">#03DAC5</color>
+        <color name="bg">#f0f5e1</color>
         <color name="purple_40">#3700B3</color>
         <color name="purple_grey_40">#03A9F4</color>
-        <color name="pink_40">#CDDC39</color>
+        <color name="cool_green">#a1b661</color>
 
+    <color name="nav">#264d50</color>
     <color name="nav_icon_color">#264d50</color>
     <color name="nav_text_color">#264d50</color>
     <color name="selected_color">#264d50</color>

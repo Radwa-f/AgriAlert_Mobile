@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.fragments.RegisterFragment"
-    android:background="#f0f5e1">
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tv_logo"

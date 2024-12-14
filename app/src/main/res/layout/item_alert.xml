@@ -1,0 +1,67 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    android:layout_marginVertical="8dp"
+    android:padding="8dp"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/white">
+
+    <!-- Main Horizontal Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:padding="10dp">
+
+        <!-- Icon -->
+        <ImageView
+            android:id="@+id/iv_alert_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="image"
+            android:layout_marginEnd="12dp"
+            android:backgroundTint="@color/nav"
+            android:src="@drawable/ic_alerts" />
+
+        <!-- Texts (Vertical Layout) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_alert_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frost Warning"
+                android:textStyle="bold"
+                android:textColor="@color/nav"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_alert_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Low Temperature"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tv_alert_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Protect your crops from frost."
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

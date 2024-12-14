@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.teal_700)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
 
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ChatBotActivity">
+
+
+    <!-- Gradient Header -->
+    <View
+        android:id="@+id/header_background"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/gradient_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Chat Title -->
+    <TextView
+        android:id="@+id/tv_chat_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AgriBot Assistant"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Conversation RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_chat_conversation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:background="@drawable/rounded_chat_background"
+        app:layout_constraintTop_toBottomOf="@id/tv_chat_title"
+        app:layout_constraintBottom_toTopOf="@id/chat_input_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="16dp"/>
+
+    <!-- Chat Input Container -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chat_input_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="4dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:background="@android:color/white">
+
+            <!-- Message Input -->
+            <EditText
+                android:id="@+id/et_message_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Ask AgriBot something..."
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:textSize="16sp"
+                android:textColor="#333"/>
+
+            <!-- Send Button -->
+            <ImageButton
+                android:id="@+id/btn_send_message"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/send_message"
+                android:src="@drawable/ic_send"
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

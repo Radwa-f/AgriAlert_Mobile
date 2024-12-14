@@ -13,8 +13,11 @@
     <string name="your_name">Full Name</string>
     <string name="loginText">Login</string>
 
-        <string name="profile_icon">Profile Icon</string>
+    <string name="profile_icon">Profile Icon</string>
 
+    <string name="chatbot_icon">Chatbot Icon</string>
+    <string name="send_message">Send Message</string>
+    <string name="alerts_icon">Alerts Icon</string>
 
 
 </resources>
