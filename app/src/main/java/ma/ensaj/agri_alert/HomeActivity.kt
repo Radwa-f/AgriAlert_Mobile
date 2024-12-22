@@ -1,5 +1,6 @@
 package ma.ensaj.agri_alert
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -17,11 +18,21 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Hide the ActionBar
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
 
+        // Set the status bar color
+        window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
+
+        // Inflate the layout using ViewBinding
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Set up OnClickListener for the chatbot icon
+        binding.ivChatbot.setOnClickListener {
+            val intent = Intent(this, ChatBotActivity::class.java) // Use 'this' instead of 'requireContext'
+            startActivity(intent)
+        }
 
         // Explicitly find the NavHostFragment
         val navHostFragment = supportFragmentManager

@@ -31,6 +31,10 @@
     <color name="selected_color">#264d50</color>
     <color name="unselected_color">#555555</color>
 
+    <color name="my_blue">#3498db</color>
+    <color name="my_green">#339d01</color>
+    <color name="my_dark">#2c3e50</color>
+    <color name="my_light_green">#2ecc71</color>
 
 
 

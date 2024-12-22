@@ -22,16 +22,16 @@ class MainActivity : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.viewPager)
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
 
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         viewPager.adapter = adapter
 
         tabLayout.setTabTextColors(
-            ContextCompat.getColor(this, R.color.grey_black), // Normal text color
-            ContextCompat.getColor(this, R.color.teal_700) // Selected text color
+            ContextCompat.getColor(this, R.color.my_dark), // Normal text color
+            ContextCompat.getColor(this, R.color.my_blue) // Selected text color
         )
-        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.teal_700))
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.my_blue))
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {

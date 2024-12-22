@@ -28,7 +28,7 @@ class WeatherActivity : AppCompatActivity() {
 
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
 
         // Get latitude and longitude from Intent
         latitude = intent.getDoubleExtra("latitude", 0.0)

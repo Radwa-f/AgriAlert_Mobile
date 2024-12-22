@@ -1,19 +1,29 @@
 package ma.ensaj.agri_alert.view.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import ma.ensaj.agri_alert.R
-import ma.ensaj.agri_alert.adapters.NewsAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ma.ensaj.agri_alert.databinding.FragmentNewsBinding
 import ma.ensaj.agri_alert.model.NewsItem
+import ma.ensaj.agri_alert.network.RetrofitInstance
+import ma.ensaj.agri_alert.view.adapters.NewsAdapter
 
 class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var newsAdapter: NewsAdapter
+    private var originalNewsList = listOf<NewsItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,16 +36,59 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val sampleNews = listOf(
-            NewsItem("Agriculture Boosts Economy", "Agriculture sector grows 15% this year.", R.drawable.ic_news_prev),
-            NewsItem("New Farming Techniques", "Learn about the latest sustainable farming methods.", R.drawable.ic_news_3),
-            NewsItem("Drought Alert", "Regions expected to face severe drought this summer.", R.drawable.ic_news_2)
-        )
-
-        val adapter = NewsAdapter(sampleNews)
         binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.newsRecyclerView.adapter = adapter
+
+
+        setupSearchBar()
+        fetchNewsData()
+    }
+
+    private fun setupSearchBar() {
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterNews(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
+    private fun fetchNewsData() {
+        lifecycleScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    RetrofitInstance.api.getNews(
+                        text = "agriculture",
+                        sourceCountry = "ma",
+                        number = 5,
+                        apiKey = "9f7f2f2a7052471f9fc6d6e478b38a77"
+                    )
+                }
+
+                if (response.news.isNotEmpty()) {
+                    originalNewsList = response.news
+                    setupRecyclerView(originalNewsList)
+                } else {
+                    Log.e("NewsFragment", "No news data available.")
+                }
+            } catch (e: Exception) {
+                Log.e("NewsFragment", "Error fetching news", e)
+            }
+        }
+    }
+
+    private fun setupRecyclerView(newsList: List<NewsItem>) {
+        newsAdapter = NewsAdapter(newsList.toMutableList())
+        binding.newsRecyclerView.adapter = newsAdapter
+    }
+
+    private fun filterNews(query: String) {
+        val filteredList = originalNewsList.filter {
+            it.title?.contains(query, ignoreCase = true) == true
+        }
+        newsAdapter.updateList(filteredList)
     }
 
     override fun onDestroyView() {

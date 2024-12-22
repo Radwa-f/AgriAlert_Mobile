@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
+        <item name="tabIndicatorHeight">6dp</item> <!-- Adjust indicator size if needed -->
+    </style>
+
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">18sp</item> <!-- Increase tab text size -->
+        <item name="android:textColor">@color/my_dark</item>
+    </style>
+
+</resources>

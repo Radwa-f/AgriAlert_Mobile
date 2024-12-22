@@ -52,11 +52,7 @@ class HomeFragment : Fragment() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        // Set up OnClickListener for chatbot icon
-        binding.ivChatbot.setOnClickListener {
-            val intent = Intent(requireContext(), ChatBotActivity::class.java)
-            startActivity(intent)
-        }
+
 
         // Navigate to WeatherActivity
         binding.weatherCard.setOnClickListener {
@@ -76,8 +72,16 @@ class HomeFragment : Fragment() {
         )
 
         val adapter = AlertsAdapter(alerts)
-        binding.rvDailyInsights.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvDailyInsights.setLayoutManager(
+            LinearLayoutManager(
+                context,
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        )
+        //binding.rvDailyInsights.layoutManager = LinearLayoutManager(requireContext())
         binding.rvDailyInsights.adapter = adapter
+
 
         // Navigate to AlertsActivity
         binding.rvDailyInsights.setOnClickListener {

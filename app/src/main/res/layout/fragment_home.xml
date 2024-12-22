@@ -2,88 +2,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@color/white"
     android:layout_marginTop="20dp">
-
-    <!-- ChatBot Icon -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_chatbot"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="8dp">
-
-        <ImageView
-            android:id="@+id/iv_chatbot"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:contentDescription="@string/chatbot_icon"
-            android:scaleType="centerCrop"
-            app:tint="#264d50"
-            android:src="@drawable/ic_chatbot" />
-    </androidx.cardview.widget.CardView>
 
     <!-- Weather Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/weather_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card_chatbot"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="8dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp">
 
-        <LinearLayout
+        <!-- Background Image -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
-            <!-- Weather Icon -->
             <ImageView
-                android:id="@+id/weather_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:contentDescription="Weather Icon"
-                android:src="@drawable/ic_weather_placeholder" />
+                android:id="@+id/weather_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/sky_bg" />
 
-            <TextView
-                android:id="@+id/tv_forecast_title"
-                android:layout_width="wrap_content"
+            <!-- Content -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="El jadida"
-                android:textStyle="bold"
-                android:textColor="@color/nav"
-                android:textSize="20sp"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal" />
-            <!-- Weather Details -->
-            <TextView
-                android:id="@+id/tv_weather_condition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sunny"
-                android:textStyle="bold"
-                android:textColor="@color/nav"
-                android:textSize="20sp"
-                android:layout_marginTop="8dp"
-                android:layout_gravity="center_horizontal" />
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tv_temperature_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="15°C - 25°C"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:layout_gravity="center_horizontal" />
-        </LinearLayout>
+                <!-- Weather Icon -->
+                <ImageView
+                    android:id="@+id/weather_icon"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="Weather Icon"
+                    android:src="@drawable/ic_weather_placeholder" />
+
+                <!-- Title -->
+                <TextView
+                    android:id="@+id/tv_forecast_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="El jadida"
+                    android:textStyle="bold"
+                    android:textColor="@color/nav"
+                    android:textSize="24sp"
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center_horizontal" />
+
+                <!-- Weather Details -->
+                <TextView
+                    android:id="@+id/tv_weather_condition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sunny"
+                    android:textStyle="bold"
+                    android:textColor="@color/nav"
+                    android:textSize="22sp"
+                    android:layout_marginTop="6dp"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/tv_temperature_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15°C - 25°C"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
     <!-- Daily Insights -->

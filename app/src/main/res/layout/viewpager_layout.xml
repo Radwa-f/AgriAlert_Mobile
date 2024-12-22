@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             app:tabMode="fixed"
             app:tabGravity="fill"
+            app:tabTextAppearance="@style/CustomTabTextAppearance"
             android:background="@color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>

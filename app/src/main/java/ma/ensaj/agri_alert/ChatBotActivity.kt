@@ -28,7 +28,7 @@ class ChatBotActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
 
 
         // Set up RecyclerView

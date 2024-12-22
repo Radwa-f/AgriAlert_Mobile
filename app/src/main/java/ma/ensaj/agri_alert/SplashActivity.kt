@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         supportActionBar?.hide()
-        window.statusBarColor = ContextCompat.getColor(this, R.color.nav)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
 
         val logo: ImageView = findViewById(R.id.logo)
 
@@ -27,11 +27,6 @@ class SplashActivity : AppCompatActivity() {
             .scaleY(0.7f)
             .setDuration(2000)
             .withEndAction {
-                // Rotate the logo 360 degrees over 1000 milliseconds
-                logo.animate()
-                    .rotation(360f)
-                    .setDuration(1000)
-                    .withEndAction {
                         // Translate the logo upward by 100 pixels over 1000 milliseconds
                         logo.animate()
                             .translationY(-100f)
@@ -44,8 +39,7 @@ class SplashActivity : AppCompatActivity() {
                                     .start()
                             }
                             .start()
-                    }
-                    .start()
+
             }
             .start()
 
