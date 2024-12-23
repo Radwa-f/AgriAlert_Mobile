@@ -6,14 +6,11 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
-
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/custom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-
         android:padding="10dp"
         android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
@@ -64,7 +61,7 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_gravity="end|center"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginTop="8dp"
             app:cardCornerRadius="25dp"
             app:cardElevation="8dp">
@@ -79,6 +76,7 @@
                 android:src="@drawable/ic_chatbot"
                 app:tint="@color/my_dark" />
         </androidx.cardview.widget.CardView>
+
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Navigation Host Fragment -->

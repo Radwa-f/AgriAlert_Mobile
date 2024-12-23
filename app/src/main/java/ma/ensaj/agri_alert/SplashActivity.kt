@@ -1,7 +1,9 @@
 package ma.ensaj.agri_alert
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -9,6 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import ma.ensaj.agri_alert.service.CropAnalysisService
+import ma.ensaj.agri_alert.worker.CropAnalysisWorker
+import java.util.concurrent.TimeUnit
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -16,6 +26,16 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+
+        val serviceIntent = Intent(this, CropAnalysisService::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent)
+        } else {
+            startService(serviceIntent)
+        }
+
+        scheduleCropAnalysisWorker()
+        scheduleCropAnalysisWorker(this)
         supportActionBar?.hide()
         window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
 
@@ -56,6 +76,40 @@ class SplashActivity : AppCompatActivity() {
         thread.start()
     }
 
+    fun scheduleCropAnalysisWorker(context: Context) {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED) // Requires internet
+            .build()
+
+        val cropAnalysisWorkRequest = PeriodicWorkRequestBuilder<CropAnalysisWorker>(2, TimeUnit.SECONDS) // Runs every 12 hours
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            "CropAnalysisWorker",
+            ExistingPeriodicWorkPolicy.REPLACE,
+            cropAnalysisWorkRequest
+        )
+    }
+
+    private fun scheduleCropAnalysisWorker() {
+        val workRequest = PeriodicWorkRequestBuilder<CropAnalysisWorker>(
+            6, TimeUnit.HOURS
+        ).build()
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED) // Requires internet
+            .build()
+
+        val cropAnalysisWorkRequest = PeriodicWorkRequestBuilder<CropAnalysisWorker>(2, TimeUnit.SECONDS) // Runs every 12 hours
+            .setConstraints(constraints)
+            .build()
+
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
+            "CropAnalysisWorker",
+            ExistingPeriodicWorkPolicy.REPLACE,
+            workRequest
+        )
+    }
     override fun onPause() {
         super.onPause()
         finish()

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="blacker">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="main">#2196F3</color>
     <color name="purple_500">#FF6200EE</color>
@@ -18,6 +18,41 @@
     <color name="shimmer_bg_color">#dddddd</color>
     <color name="dark_coal">#1D1D1D</color>
 
+    <color name="nav1">#2C3E50</color> <!-- Navy Blue: For titles and headers -->
+    <color name="dark_red">#E74C3C</color> <!-- Bright Red: For warnings and severity -->
+    <color name="black">#2D3436</color> <!-- Neutral Black: For body text -->
+   <!-- White: For card backgrounds -->
+    <color name="light_gray">#F2F4F4</color> <!-- Light Gray: For card background highlights -->
+    <color name="gray">#7F8C8D</color> <!-- Medium Gray: For secondary text -->
+    <color name="green">#27AE60</color> <!-- Green: For positive messages -->
+    <color name="yellow">#F1C40F</color> <!-- Yellow: For informational messages -->
+     <!-- Bright Blue: For accents -->
+
+    <!-- Alert Type Colors -->
+    <color name="alert_type_info_background">#E6F2FF</color>
+    <color name="alert_type_warning_background">#FFF4E5</color>
+    <color name="alert_type_error_background">#FFE5E5</color>
+    <color name="alert_type_text">#007BFF</color>
+
+    <!-- Severity Colors -->
+    <color name="severity_low_background">#E6F2FF</color>
+    <color name="severity_low_text">#007BFF</color>
+    <color name="severity_medium_background">#FFF4E5</color>
+    <color name="severity_medium_text">#FF9800</color>
+    <color name="severity_high_background">#FFE5E5</color>
+    <color name="severity_high_text">#DC3545</color>
+
+    <!-- Alert Text Colors -->
+    <color name="alert_title_text">#333333</color>
+    <color name="alert_reason_text">#666666</color>
+    <color name="alert_description_text">#333333</color>
+
+    <!-- Alert Severity Indicator -->
+    <color name="alert_low_severity">#007BFF</color>
+    <color name="alert_medium_severity">#FF9800</color>
+    <color name="alert_high_severity">#DC3545</color>
+
+    <color name="faint_grey">#F5F5F5</color>
         <color name="purple_80">#BB86FC</color>
         <color name="purple_grey_80">#6200EE</color>
         <color name="bg">#f0f5e1</color>
@@ -29,7 +64,7 @@
     <color name="nav_icon_color">#264d50</color>
     <color name="nav_text_color">#264d50</color>
     <color name="selected_color">#264d50</color>
-    <color name="unselected_color">#555555</color>
+    <color name="unselected_color">#979696</color>
 
     <color name="my_blue">#3498db</color>
     <color name="my_green">#339d01</color>

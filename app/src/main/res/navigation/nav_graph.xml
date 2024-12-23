@@ -14,9 +14,9 @@
 
     <fragment
         android:id="@+id/nav_search"
-        android:name="ma.ensaj.agri_alert.view.fragments.SearchFragment"
-        android:label="Search"
-        tools:layout="@layout/fragment_search" >
+        android:name="ma.ensaj.agri_alert.view.fragments.CropAnalysisFragment"
+        android:label="Crops"
+        tools:layout="@layout/fragment_crop_analysis" >
 
     </fragment>
 

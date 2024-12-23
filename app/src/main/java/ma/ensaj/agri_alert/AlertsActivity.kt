@@ -23,9 +23,9 @@ class AlertsActivity : AppCompatActivity() {
         binding.rvAllAlerts.adapter = adapter
 
         // Dummy data for testing
-        alertsList.add(Alert("Frost Warning", "Low Temperature", "Protect your crops from frost."))
-        alertsList.add(Alert("Heavy Rain", "High Precipitation", "Prepare drainage for heavy rain."))
-        alertsList.add(Alert("Pest Alert", "Pest Activity", "Use pesticide for pest control."))
+        alertsList.add(Alert("Frost Warning", "Low Temperature", "Protect your crops from frost.","HIGH"))
+        alertsList.add(Alert("Heavy Rain", "High Precipitation", "Prepare drainage for heavy rain.","HIGH"))
+        alertsList.add(Alert("Pest Alert", "Pest Activity", "Use pesticide for pest control.","HIGH"))
         adapter.notifyDataSetChanged()
     }
 }

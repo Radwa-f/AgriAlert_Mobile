@@ -1,67 +1,126 @@
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="280dp"
-    android:layout_height="200dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    android:layout_marginVertical="8dp"
-    android:padding="8dp"
-    android:layout_margin="10dp"
-    android:backgroundTint="@color/white">
+    app:cardElevation="4dp">
 
-    <!-- Main Horizontal Layout -->
+    <!-- Main Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_margin="10dp"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <!-- Icon -->
-        <ImageView
-            android:id="@+id/iv_alert_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="image"
-            android:layout_marginEnd="12dp"
-            android:backgroundTint="@color/nav"
-            android:src="@drawable/ic_alerts" />
+        <!-- Status Bar -->
+        <View
+            android:id="@+id/v_alert_status_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/alert_high_severity"/>
 
-        <!-- Texts (Vertical Layout) -->
+        <!-- Content Layout -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tv_alert_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Frost Warning"
-                android:textStyle="bold"
-                android:textColor="@color/nav"
-                android:textSize="16sp" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:padding="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="8dp"
+                >
+            <!-- Alert Icon -->
+            <ImageView
+                android:id="@+id/iv_alert_icon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_alerts"
+                android:contentDescription="Alert Icon"/>
+            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tv_alert_reason"
-                android:layout_width="wrap_content"
+            <!-- Text Container -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Low Temperature"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:layout_marginTop="4dp" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_alert_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Protect your crops from frost."
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:layout_marginTop="4dp" />
+                <!-- Alert Type and Severity -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:id="@+id/tv_alert_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="WARNING"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/alert_type_text"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_alert_severity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="HIGH"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/severity_high_text"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"/>
+                </LinearLayout>
+
+                <!-- Alert Title -->
+                <TextView
+                    android:id="@+id/tv_alert_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Frost Warning"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="@color/alert_title_text"
+                    android:layout_marginBottom="4dp"/>
+
+                <!-- Alert Reason -->
+                <TextView
+                    android:id="@+id/tv_alert_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Low Temperature"
+                    android:textSize="14sp"
+                    android:textColor="@color/alert_reason_text"
+                    android:layout_marginBottom="4dp"/>
+
+                <!-- Alert Description -->
+                <TextView
+                    android:id="@+id/tv_alert_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Protect your crops from frost."
+                    android:textSize="14sp"
+                    android:textColor="@color/alert_description_text"/>
+            </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -1,7 +1,8 @@
 package ma.ensaj.agri_alert.model
 
 data class Alert(
+    val type: String,
     val title: String,
-    val reason: String,
-    val description: String
+    val message: String,
+    val severity: String
 )

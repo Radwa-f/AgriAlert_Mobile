@@ -3,14 +3,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_marginTop="20dp">
+    android:layout_marginTop="10dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_user_crops"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Crops - What I'm raising"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="16dp" />
+
+    <!-- Crops RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_crops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_user_crops"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/tv_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forecast - My Current Weather"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/rv_crops"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp" />
 
     <!-- Weather Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/weather_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/tv_weather"
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="8dp"
         app:cardCornerRadius="16dp"
@@ -30,12 +64,11 @@
 
             <!-- Content -->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="370dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Weather Icon -->
                 <ImageView
                     android:id="@+id/weather_icon"
                     android:layout_width="110dp"
@@ -44,43 +77,41 @@
                     android:contentDescription="Weather Icon"
                     android:src="@drawable/ic_weather_placeholder" />
 
-                <!-- Title -->
                 <TextView
                     android:id="@+id/tv_forecast_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="El jadida"
-                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:text="El Jadida"
                     android:textColor="@color/nav"
                     android:textSize="24sp"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="center_horizontal" />
+                    android:textStyle="bold" />
 
-                <!-- Weather Details -->
                 <TextView
                     android:id="@+id/tv_weather_condition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="6dp"
                     android:text="Sunny"
-                    android:textStyle="bold"
                     android:textColor="@color/nav"
                     android:textSize="22sp"
-                    android:layout_marginTop="6dp"
-                    android:layout_gravity="center_horizontal" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_temperature_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:text="15°C - 25°C"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:layout_gravity="center_horizontal" />
+                    android:textSize="20sp" />
             </LinearLayout>
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Daily Insights -->
+    <!-- Daily Insights Title -->
     <TextView
         android:id="@+id/tv_daily_insights_title"
         android:layout_width="wrap_content"
@@ -89,11 +120,11 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/black"
+        android:layout_below="@id/weather_card"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_below="@id/weather_card" />
+        android:layout_marginStart="16dp" />
 
-    <!-- Alerts RecyclerView -->
+    <!-- Daily Insights RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_daily_insights"
         android:layout_width="match_parent"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".view.fragments.RegisterFragment"
     android:background="@color/white">
@@ -18,7 +18,7 @@
         android:textColor="@color/my_dark"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="60dp"/>
+        android:layout_marginTop="60dp" />
 
     <TextView
         android:id="@+id/tv_subtitle"
@@ -28,7 +28,9 @@
         android:textSize="17sp"
         android:textColor="@color/my_dark"
         android:layout_marginStart="25dp"
-        android:layout_marginBottom="50dp"/>
+        android:layout_marginBottom="40dp" />
+
+    <!-- Other EditText fields -->
 
     <EditText
         android:id="@+id/et_first_name"
@@ -56,7 +58,6 @@
         android:background="@drawable/custom_et"
         android:textSize="15sp" />
 
-
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
@@ -66,7 +67,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:padding="15dp"
-
         android:inputType="textEmailAddress"
         android:background="@drawable/custom_et"
         android:textSize="15sp" />
@@ -80,7 +80,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:padding="15dp"
-
         android:inputType="textPassword"
         android:background="@drawable/custom_et"
         android:textSize="15sp" />
@@ -94,7 +93,6 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="10dp"
         android:padding="15dp"
-
         android:inputType="textPassword"
         android:background="@drawable/custom_et"
         android:textSize="15sp" />
@@ -112,8 +110,32 @@
         android:background="@drawable/custom_et"
         android:textSize="15sp" />
 
+    <!-- Styled Crop Spinner -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Select Crops"
+        android:textColorHint="@color/unselected_color"
+        app:boxBackgroundMode="filled"
+        android:background="@drawable/custom_et"
+        app:boxStrokeColor="@color/faint_grey"
+        app:boxBackgroundColor="@color/white">
 
+        <MultiAutoCompleteTextView
+            android:id="@+id/cropSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:completionThreshold="1"
+            android:background="@android:color/transparent"
+            android:inputType="none"
+            android:textSize="15sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Register Button -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

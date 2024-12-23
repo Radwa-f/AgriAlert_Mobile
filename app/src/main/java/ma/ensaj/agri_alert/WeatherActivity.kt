@@ -50,6 +50,7 @@ class WeatherActivity : AppCompatActivity() {
                         latitude = latitude,
                         longitude = longitude,
                         daily = "temperature_2m_max,temperature_2m_min,precipitation_sum",
+                        hourly = "precipitation",
                         timezone = "auto"
                     )
                 }

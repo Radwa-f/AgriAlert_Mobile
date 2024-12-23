@@ -36,8 +36,11 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        // Initialize RecyclerView and Adapter
+        newsAdapter = NewsAdapter(mutableListOf()) // Initialize with an empty list
+        binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.newsRecyclerView.adapter = newsAdapter
 
         setupSearchBar()
         fetchNewsData()
@@ -80,15 +83,16 @@ class NewsFragment : Fragment() {
     }
 
     private fun setupRecyclerView(newsList: List<NewsItem>) {
-        newsAdapter = NewsAdapter(newsList.toMutableList())
-        binding.newsRecyclerView.adapter = newsAdapter
+        newsAdapter.updateList(newsList)
     }
 
     private fun filterNews(query: String) {
-        val filteredList = originalNewsList.filter {
-            it.title?.contains(query, ignoreCase = true) == true
+        if (::newsAdapter.isInitialized) { // Ensure the adapter is initialized
+            val filteredList = originalNewsList.filter {
+                it.title?.contains(query, ignoreCase = true) == true
+            }
+            newsAdapter.updateList(filteredList)
         }
-        newsAdapter.updateList(filteredList)
     }
 
     override fun onDestroyView() {
@@ -96,3 +100,4 @@ class NewsFragment : Fragment() {
         _binding = null
     }
 }
+

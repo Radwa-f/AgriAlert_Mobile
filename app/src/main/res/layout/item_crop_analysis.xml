@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- Image with Rounded Corners -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/news_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/coffee" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Text Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Crop Name -->
+            <TextView
+                android:id="@+id/tv_crop_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crop: Wheat"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:textColor="@color/nav"
+                android:layout_marginBottom="4dp" />
+
+            <!-- Overall Severity -->
+            <TextView
+                android:id="@+id/tv_overall_severity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Overall Severity: HIGH"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/dark_red"
+                android:layout_marginBottom="8dp" />
+
+            <!-- Alerts -->
+            <TextView
+                android:id="@+id/tv_alerts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alerts"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/nav"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tv_alerts_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="High Temperature Alert: Risk of heat stress"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="4dp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

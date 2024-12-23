@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "160445617526",
+    "project_id": "agrialert-25d0f",
+    "storage_bucket": "agrialert-25d0f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160445617526:android:d65621f9aad4301d80d657",
+        "android_client_info": {
+          "package_name": "ma.ensaj.agri_alert"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhE7a1rCEs9-ixohjk04RTuJridjdQOuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -12,4 +12,6 @@ interface NewsApiService {
         @Query("number") number: Int,
         @Query("api-key") apiKey: String
     ): NewsResponse
+
+
 }

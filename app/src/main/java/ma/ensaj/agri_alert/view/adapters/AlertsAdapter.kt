@@ -19,7 +19,7 @@ class AlertsAdapter(private val items: List<Alert>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_TASK) {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_task, parent, false)
+                .inflate(R.layout.item_alert, parent, false)
             TaskViewHolder(view)
         } else {
             val view = LayoutInflater.from(parent.context)
@@ -41,7 +41,7 @@ class AlertsAdapter(private val items: List<Alert>) :
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind() {
-            itemView.findViewById<TextView>(R.id.tv_task).text = "Add your task..."
+
             // Handle click if needed
         }
     }
@@ -49,8 +49,8 @@ class AlertsAdapter(private val items: List<Alert>) :
     class AlertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(alert: Alert) {
             itemView.findViewById<TextView>(R.id.tv_alert_title).text = alert.title
-            itemView.findViewById<TextView>(R.id.tv_alert_reason).text = alert.reason
-            itemView.findViewById<TextView>(R.id.tv_alert_description).text = alert.description
+            //itemView.findViewById<TextView>(R.id.tv_alert_reason).text = alert.reason
+            //itemView.findViewById<TextView>(R.id.tv_alert_description).text = alert.description
 
             // Use the local drawable for the icon
             val iconView = itemView.findViewById<ImageView>(R.id.iv_alert_icon)

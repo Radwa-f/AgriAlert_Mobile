@@ -24,6 +24,7 @@ import ma.ensaj.agri_alert.R
 import ma.ensaj.agri_alert.HomeActivity
 import ma.ensaj.agri_alert.model.LoginRequest
 import ma.ensaj.agri_alert.network.RetrofitClient
+import ma.ensaj.agri_alert.util.SharedPreferencesHelper
 import ma.ensaj.agri_alert.view.viewmodel.UserViewModel
 
 class LoginFragment : Fragment() {
@@ -111,6 +112,8 @@ class LoginFragment : Fragment() {
                     if (token != null) {
                         saveToken(token) // Save the token for future use
                         showToast("Login successful, Token saved")
+                        context?.let { SharedPreferencesHelper.saveToken(it, token) } // Save the token
+
                         navigateToActivity()
                     } else {
                         showToast("Login failed: Empty response")

@@ -12,6 +12,7 @@ interface WeatherService {
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double,
         @Query("daily") daily: String,
+        @Query("hourly") hourly: String,
         @Query("timezone") timezone: String
     ): WeatherResponse
 }

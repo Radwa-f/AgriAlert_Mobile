@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -22,12 +20,14 @@ import ma.ensaj.agri_alert.model.RegistrationRequest
 import ma.ensaj.agri_alert.network.RetrofitClient
 import ma.ensaj.agri_alert.util.SharedPreferencesHelper
 import ma.ensaj.agri_alert.view.viewmodel.UserViewModel
-import androidx.appcompat.app.AppCompatActivity
 
 class RegisterFragment : Fragment() {
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var cropSpinner: MultiAutoCompleteTextView
+    private var selectedCrops = mutableListOf<String>()
 
     private var latitude: Double? = null
     private var longitude: Double? = null
@@ -43,6 +43,7 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        cropSpinner = view.findViewById(R.id.cropSpinner)
         userViewModel = ViewModelProvider(requireActivity())[UserViewModel::class.java]
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -50,6 +51,22 @@ class RegisterFragment : Fragment() {
             fetchLocation()
         }
 
+        // Load crop names and set up the adapter
+        val cropNames = resources.getStringArray(R.array.crop_names)
+        val cropAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, cropNames)
+        cropSpinner.setAdapter(cropAdapter)
+        cropSpinner.setTokenizer(MultiAutoCompleteTextView.CommaTokenizer())
+
+        // Handle item selection
+        cropSpinner.setOnItemClickListener { _, _, position, _ ->
+            val selectedCrop = cropAdapter.getItem(position)
+            if (selectedCrop != null && !selectedCrops.contains(selectedCrop)) {
+                selectedCrops.add(selectedCrop)
+                Toast.makeText(requireContext(), "Selected: $selectedCrop", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Initialize other UI elements
         val etFirstName = view.findViewById<EditText>(R.id.et_first_name)
         val etLastName = view.findViewById<EditText>(R.id.et_last_name)
         val etEmail = view.findViewById<EditText>(R.id.et_email)
@@ -58,6 +75,7 @@ class RegisterFragment : Fragment() {
         val etPhone = view.findViewById<EditText>(R.id.et_phone)
         val btnRegister = view.findViewById<Button>(R.id.btn_register)
 
+        // Handle register button click
         btnRegister.setOnClickListener {
             val firstName = etFirstName.text.toString().trim()
             val lastName = etLastName.text.toString().trim()
@@ -81,7 +99,7 @@ class RegisterFragment : Fragment() {
                         password = password,
                         phoneNumber = phoneNumber,
                         location = location,
-                        crops = listOf("Wheat", "Corn") // Example crops
+                        crops = selectedCrops
                     )
                     registerUser(request)
                 }
@@ -156,6 +174,8 @@ class RegisterFragment : Fragment() {
         view?.findViewById<EditText>(R.id.et_password)?.text?.clear()
         view?.findViewById<EditText>(R.id.et_repassword)?.text?.clear()
         view?.findViewById<EditText>(R.id.et_phone)?.text?.clear()
+        cropSpinner.setText("") // Clear selected crops
+        selectedCrops.clear()
     }
 
     private fun showToast(message: String) {

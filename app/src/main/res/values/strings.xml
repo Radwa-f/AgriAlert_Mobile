@@ -19,5 +19,32 @@
     <string name="send_message">Send Message</string>
     <string name="alerts_icon">Alerts Icon</string>
 
+    <string-array name="crop_names">
+        <item>Rice</item>
+        <item>Wheat</item>
+        <item>Maize</item>
+        <item>Millets</item>
+        <item>Bajra (Pearl Millet)</item>
+        <item>Pulses (Kharif)</item>
+        <item>Lentil (Rabi)</item>
+        <item>Oilseeds</item>
+        <item>Groundnut</item>
+        <item>Sugarcane</item>
+        <item>Sugar beet</item>
+        <item>Cotton</item>
+        <item>Tea</item>
+        <item>Coffee</item>
+        <item>Cocoa</item>
+        <item>Rubber</item>
+        <item>Jute</item>
+        <item>Flax</item>
+        <item>Coconut</item>
+        <item>Oil-palm</item>
+        <item>Clove</item>
+        <item>Black Pepper</item>
+        <item>Cardamom</item>
+        <item>Turmeric</item>
+    </string-array>
+
 
 </resources>
