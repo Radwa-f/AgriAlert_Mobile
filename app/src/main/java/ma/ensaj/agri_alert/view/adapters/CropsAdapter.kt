@@ -48,13 +48,13 @@ class CropsAdapter(
                     val imageUrl = response.body()?.urls?.regular
                     Glide.with(holder.itemView.context)
                         .load(imageUrl)
-                        .placeholder(R.drawable.ic_crops) // Placeholder image
+                        .placeholder(R.drawable.ic_corn)
                         .into(holder.cropImageView)
                 }
             }
 
             override fun onFailure(call: Call<UnsplashPhotoResponse>, t: Throwable) {
-                // Handle API failure (optional logging or fallback image)
+
                 Glide.with(holder.itemView.context)
                     .load(R.drawable.ic_crops) // Fallback image
                     .into(holder.cropImageView)

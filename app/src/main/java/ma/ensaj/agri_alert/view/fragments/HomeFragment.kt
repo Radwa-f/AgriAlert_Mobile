@@ -75,8 +75,6 @@ class HomeFragment : Fragment() {
             checkNotificationPermission()
         }
 
-
-
         // Navigate to WeatherActivity
         binding.weatherCard.setOnClickListener {
             val intent = Intent(requireContext(), WeatherActivity::class.java)
@@ -85,15 +83,18 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        // Add this to the onViewCreated method in HomeFragment
         val crops = listOf(
             Crop("Wheat", "Growing", R.drawable.ic_wheat),
             Crop("Corn", "Ready to Harvest", R.drawable.ic_corn),
             Crop("Rice", "Planting", R.drawable.ic_rice)
         )
+        binding.rvCrops.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.HORIZONTAL,
+            false
+        )
 
-        binding.rvCrops.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
+        fetchUserCrops()
 
         fetchAndDisplayAlerts()
 
@@ -105,72 +106,58 @@ class HomeFragment : Fragment() {
             )
         )
 
-
-
         // Navigate to AlertsActivity
         binding.rvDailyInsights.setOnClickListener {
             val intent = Intent(requireContext(), AlertsActivity::class.java)
             startActivity(intent)
         }
 
-        // Check for location permission and fetch location
-        if (checkLocationPermission()) {
-            fetchLocation()
-        } else {
-            Log.e("Position", "Location permission not granted.")
-        }
+        fetchWeatherData()
+
     }
 
-    private fun fetchLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null && location.latitude != 0.0 && location.longitude != 0.0) {
-                    latitude = location.latitude
-                    longitude = location.longitude
-                    Log.d("Position", "Fetched location: Latitude = $latitude, Longitude = $longitude")
-                    fetchWeatherData(latitude!!, longitude!!)
-                    fetchCityName(latitude!!, longitude!!)
-                } else {
-                    Log.d("Position", "Unable to fetch a valid location.")
-                }
-            }.addOnFailureListener {
-                Log.e("Position", "Failed to fetch location: ${it.message}")
-            }
-        } else {
-            Log.e("Position", "Location permission not granted.")
+    private fun fetchWeatherData() {
+        val token = SharedPreferencesHelper.getToken(requireContext())
+        if (token.isNullOrEmpty()) {
+            Log.e("ProfileAPI", "Authorization token is missing")
+            return
         }
-    }
 
-    private fun fetchWeatherData(latitude: Double, longitude: Double) {
         lifecycleScope.launch {
             try {
-                val response = withContext(Dispatchers.IO) {
-                    WeatherApi.retrofitService.getWeather(
-                        latitude = latitude,
-                        longitude = longitude,
-                        daily = "temperature_2m_max,temperature_2m_min,precipitation_sum",
-                        hourly = "precipitation",
-                        timezone = "auto"
-                    )
+                val response = RetrofitClient.instance.getUserProfile("Bearer $token")
+                if (response.isSuccessful) {
+                    val userProfile = response.body()
+                    if (userProfile != null && userProfile.location != null) {
+                        val latitude = userProfile.location.latitude
+                        val longitude = userProfile.location.longitude
+
+                        fetchCityName(latitude, longitude)
+                        val weatherResponse = withContext(Dispatchers.IO) {
+                            WeatherApi.retrofitService.getWeather(
+                                latitude = latitude,
+                                longitude = longitude,
+                                daily = "temperature_2m_max,temperature_2m_min,precipitation_sum",
+                                hourly = "precipitation",
+                                timezone = "auto"
+                            )
+                        }
+
+                        Log.d("WeatherAPI", "Response: $weatherResponse")
+                        updateWeatherCard(weatherResponse)
+                        processRainfallForNextDay(weatherResponse)
+                    } else {
+                        Log.e("ProfileAPI", "User location is missing")
+                    }
+                } else {
+                    Log.e("ProfileAPI", "Error fetching profile: ${response.errorBody()?.string()}")
                 }
-                Log.d("WeatherAPI", "Response: $response")
-
-                weatherResponse = response
-                updateWeatherCard(response)
-
-                processRainfallForNextDay(response)
-
-                fetchUserCrops()
-
             } catch (e: Exception) {
                 Log.e("WeatherAPI", "Error fetching weather data: ${e.message}")
             }
         }
     }
+
 
     private fun updateWeatherCard(weatherResponse: WeatherResponse) {
         val currentTemperature = weatherResponse.daily.temperatureMax[0]

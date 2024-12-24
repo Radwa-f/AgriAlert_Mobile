@@ -33,6 +33,11 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, ChatBotActivity::class.java) // Use 'this' instead of 'requireContext'
             startActivity(intent)
         }
+        binding.ivProfile.setOnClickListener {
+            val intent = Intent(this, UserProfileActivity::class.java)
+            startActivity(intent)
+        }
+
 
         // Explicitly find the NavHostFragment
         val navHostFragment = supportFragmentManager

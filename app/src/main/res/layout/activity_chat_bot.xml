@@ -9,33 +9,49 @@
     tools:context=".ChatBotActivity">
 
 
-    <!-- Gradient Header -->
-    <View
-        android:id="@+id/header_background"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/gradient_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+    <!-- Chat Title -->
+
+    <!-- Conversation RecyclerView -->
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+
+        android:src="@drawable/ic_arrow_left"
+        app:layout_constraintEnd_toStartOf="@+id/tv_chat_title"
+        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="..."
+        android:textColor="@color/my_dark"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toEndOf="@+id/tv_chat_title"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Chat Title -->
     <TextView
         android:id="@+id/tv_chat_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="32dp"
         android:text="AgriBot Assistant"
         android:textColor="@color/my_dark"
-        android:textSize="22sp"
+        android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Conversation RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_chat_conversation"
         android:layout_width="0dp"

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.googleGmsGoogleServices)
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.messaging)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -83,6 +85,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
     implementation ("com.google.android.gms:play-services-location:21.0.1")
     implementation ("androidx.cardview:cardview:1.0.0")
+    implementation ("com.google.android.gms:play-services-maps:18.1.0")
 
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.5")
