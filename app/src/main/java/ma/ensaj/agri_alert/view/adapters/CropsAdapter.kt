@@ -1,7 +1,6 @@
 package ma.ensaj.agri_alert.view.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import ma.ensaj.agri_alert.CropsDetailsActivity
 import ma.ensaj.agri_alert.R
 import ma.ensaj.agri_alert.model.Crop
 import ma.ensaj.agri_alert.network.RetrofitUnsplash
