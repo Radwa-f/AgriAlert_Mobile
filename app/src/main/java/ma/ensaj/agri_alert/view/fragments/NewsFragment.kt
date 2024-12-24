@@ -65,13 +65,19 @@ class NewsFragment : Fragment() {
                     RetrofitInstance.api.getNews(
                         text = "agriculture",
                         sourceCountry = "ma",
-                        number = 5,
+                        number = 10,
                         apiKey = "9f7f2f2a7052471f9fc6d6e478b38a77"
                     )
                 }
 
                 if (response.news.isNotEmpty()) {
-                    originalNewsList = response.news
+                    originalNewsList = response.news.sortedWith(compareBy<NewsItem> {
+                        // Prioritize titles starting with "A"
+                        it.title?.startsWith("A", ignoreCase = true) == false
+                    }.thenBy {
+                        // Sort alphabetically as a fallback
+                        it.title
+                    })
                     setupRecyclerView(originalNewsList)
                 } else {
                     Log.e("NewsFragment", "No news data available.")
@@ -82,18 +88,26 @@ class NewsFragment : Fragment() {
         }
     }
 
-    private fun setupRecyclerView(newsList: List<NewsItem>) {
-        newsAdapter.updateList(newsList)
-    }
-
     private fun filterNews(query: String) {
         if (::newsAdapter.isInitialized) { // Ensure the adapter is initialized
             val filteredList = originalNewsList.filter {
                 it.title?.contains(query, ignoreCase = true) == true
-            }
+            }.sortedWith(compareBy<NewsItem> {
+                // Prioritize titles starting with "A"
+                it.title?.startsWith("A", ignoreCase = true) == false
+            }.thenBy {
+                // Sort alphabetically as a fallback
+                it.title
+            })
             newsAdapter.updateList(filteredList)
         }
     }
+
+
+    private fun setupRecyclerView(newsList: List<NewsItem>) {
+        newsAdapter.updateList(newsList)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

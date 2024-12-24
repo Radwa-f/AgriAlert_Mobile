@@ -5,6 +5,7 @@ import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Build
@@ -91,30 +92,11 @@ class HomeFragment : Fragment() {
             Crop("Rice", "Planting", R.drawable.ic_rice)
         )
 
-        val cropsAdapter = CropsAdapter(crops)
         binding.rvCrops.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvCrops.adapter = cropsAdapter
 
-        // Dummy alerts for RecyclerView
-        val alerts = listOf(
-            Alert("Frost Warning", "Low Temperature", "Protect your crops from frost.", "HIGH"),
-            Alert("Heavy Rain", "High Precipitation", "Prepare drainage for heavy rain.", "HIGH"),
-            Alert("Pest Alert", "Pest Activity", "Use pesticide for pest control.", "HIGH"),
-            Alert("Drought Risk", "High Temperature", "Ensure irrigation system is ready.", "HIGH"),
-            Alert("Windstorm", "High Wind Speeds", "Secure your equipment.", "HIGH")
-        )
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val token = task.result
-                Log.d("FCM", "FCM Token: $token")
-                // You can use the token for direct notification if needed.
-            } else {
-                Log.e("FCM", "Error fetching FCM token", task.exception)
-            }
-        }
+        fetchAndDisplayAlerts()
 
-        val adapter = AlertsAdapter(alerts)
         binding.rvDailyInsights.setLayoutManager(
             LinearLayoutManager(
                 context,
@@ -122,8 +104,7 @@ class HomeFragment : Fragment() {
                 false
             )
         )
-        //binding.rvDailyInsights.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvDailyInsights.adapter = adapter
+
 
 
         // Navigate to AlertsActivity
@@ -271,6 +252,7 @@ class HomeFragment : Fragment() {
                         val userCrops = userProfile.crops
                         Log.d("ProfileAPI", "Fetched Crops: $userCrops")
 
+                        displayCrops(userCrops)
                         // Extract weather details
                         if (latitude != null && longitude != null && weatherResponse != null) {
                             val maxTemp = weatherResponse!!.daily.temperatureMax[1]
@@ -295,10 +277,8 @@ class HomeFragment : Fragment() {
 
                                 // Save the analysis response
                                 SharedPreferencesHelper.saveCropAnalysis(requireContext(), cropAnalysisData)
-                                triggerNotification(
-                                    title = "New Crop Analysis Available",
-                                    message = "Tap to view recommendations for your crops."
-                                )
+
+
                             } else {
                                 Log.e("WeatherAPI", "Error fetching analysis: ${analysisResponse.errorBody()?.string()}")
                             }
@@ -310,6 +290,33 @@ class HomeFragment : Fragment() {
             } catch (e: Exception) {
                 Log.e("ProfileAPI", "Exception occurred: ${e.message}")
             }
+        }
+    }
+
+    private fun displayCrops(userCrops: List<String>) {
+        if (userCrops.isNotEmpty()) {
+            // Map userCrops to a list of Crop objects (you can customize this)
+            val crops = userCrops.map { cropName ->
+                Crop(
+                    name = cropName,
+                    status = "Unknown", // Placeholder status, update if backend provides it
+                    imageRes = R.drawable.ic_crops // Placeholder image
+                )
+            }
+
+            Log.d("Crops", "Displaying crops in RecyclerView: $crops")
+
+            // Update the RecyclerView
+            val cropsAdapter = CropsAdapter(crops, requireContext())
+
+            binding.rvCrops.layoutManager = LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+            binding.rvCrops.adapter = cropsAdapter
+        } else {
+            Log.d("Crops", "No crops found for the user.")
         }
     }
 
@@ -342,62 +349,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-    private fun triggerNotification(title: String, message: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                Log.e("Notification", "Permission not granted to post notifications.")
-                return
-            }
-        }
-
-        val notificationId = 101  // Unique ID for the notification
-        val channelId = "AgriAlert_Channel"
-
-        // Create a notification channel for Android 8.0+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "AgriAlert Notifications",
-                NotificationManager.IMPORTANCE_HIGH
-            ).apply {
-                description = "Notifications for AgriAlert recommendations"
-            }
-            val notificationManager =
-                requireContext().getSystemService(NotificationManager::class.java)
-            notificationManager?.createNotificationChannel(channel)
-        }
-
-        // Create an intent to open the crop details screen
-        val intent = Intent(requireContext(), CropsDetailsActivity::class.java).apply {
-            putExtra("analysis", "data") // Pass data if needed
-        }
-        val pendingIntent = PendingIntent.getActivity(
-            requireContext(),
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // Build the notification
-        val notification = NotificationCompat.Builder(requireContext(), channelId)
-            .setSmallIcon(R.drawable.ic_alerts)  // Replace with your notification icon
-            .setContentTitle(title)
-            .setContentText(message)
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(pendingIntent)  // What happens when the notification is clicked
-            .setAutoCancel(true)  // Remove the notification when clicked
-            .build()
-
-        // Show the notification
-        NotificationManagerCompat.from(requireContext()).notify(notificationId, notification)
-    }
-
-
-
     private fun processRainfallForNextDay(weatherResponse: WeatherResponse) {
         val hourlyPrecipitation = weatherResponse.hourly.precipitation
         val hourlyTime = weatherResponse.hourly.time
@@ -420,7 +371,42 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun fetchAndDisplayAlerts() {
+        Log.d("Alerts", "Fetching alerts from SharedPreferences")
 
+        // Retrieve CropAnalysisResponse from SharedPreferences
+        val cropAnalysisData = SharedPreferencesHelper.getCropAnalysis(requireContext())
+
+        if (cropAnalysisData != null) {
+            Log.d("Alerts", "CropAnalysisResponse retrieved: $cropAnalysisData")
+
+            // Extract all alerts from all crop analyses
+            val alerts = cropAnalysisData.cropAnalyses.values.flatMap { it.alerts }
+
+            // Log the number and details of alerts
+            Log.d("Alerts", "Number of alerts extracted: ${alerts.size}")
+            alerts.forEachIndexed { index, alert ->
+                Log.d("Alerts", "Alert $index: $alert")
+            }
+
+            if (alerts.isNotEmpty()) {
+                Log.d("Alerts", "Displaying alerts in RecyclerView")
+
+                // Update RecyclerView with alerts
+                val adapter = AlertsAdapter(alerts)
+                binding.rvDailyInsights.layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                binding.rvDailyInsights.adapter = adapter
+            } else {
+                Log.d("Alerts", "No alerts found to display")
+            }
+        } else {
+            Log.d("Alerts", "CropAnalysisResponse is null. No alerts to display.")
+        }
+    }
 
 
 

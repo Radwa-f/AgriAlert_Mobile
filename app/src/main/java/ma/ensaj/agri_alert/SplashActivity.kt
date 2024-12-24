@@ -20,46 +20,33 @@ import ma.ensaj.agri_alert.service.CropAnalysisService
 import ma.ensaj.agri_alert.worker.CropAnalysisWorker
 import java.util.concurrent.TimeUnit
 
-@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
-        val serviceIntent = Intent(this, CropAnalysisService::class.java)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent)
-        } else {
-            startService(serviceIntent)
-        }
-
-        scheduleCropAnalysisWorker()
-        scheduleCropAnalysisWorker(this)
+        startCropAnalysisWorker()
         supportActionBar?.hide()
         window.statusBarColor = ContextCompat.getColor(this, R.color.my_dark)
 
         val logo: ImageView = findViewById(R.id.logo)
 
-        // Scale down the logo to 40% of its original size (X and Y scale) over 2000 milliseconds
         logo.animate()
             .scaleX(0.7f)
             .scaleY(0.7f)
             .setDuration(2000)
             .withEndAction {
-                        // Translate the logo upward by 100 pixels over 1000 milliseconds
+                logo.animate()
+                    .translationY(-100f)
+                    .setDuration(1000)
+                    .withEndAction {
                         logo.animate()
-                            .translationY(-100f)
-                            .setDuration(1000)
-                            .withEndAction {
-                                // Make the logo completely transparent (alpha 0) over 4000 milliseconds
-                                logo.animate()
-                                    .alpha(0f)
-                                    .setDuration(4000)
-                                    .start()
-                            }
+                            .alpha(0f)
+                            .setDuration(4000)
                             .start()
-
+                    }
+                    .start()
             }
             .start()
 
@@ -76,43 +63,26 @@ class SplashActivity : AppCompatActivity() {
         thread.start()
     }
 
-    fun scheduleCropAnalysisWorker(context: Context) {
+    private fun startCropAnalysisWorker() {
         val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED) // Requires internet
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        val cropAnalysisWorkRequest = PeriodicWorkRequestBuilder<CropAnalysisWorker>(2, TimeUnit.SECONDS) // Runs every 12 hours
-            .setConstraints(constraints)
-            .build()
-
-        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
-            "CropAnalysisWorker",
-            ExistingPeriodicWorkPolicy.REPLACE,
-            cropAnalysisWorkRequest
-        )
-    }
-
-    private fun scheduleCropAnalysisWorker() {
         val workRequest = PeriodicWorkRequestBuilder<CropAnalysisWorker>(
-            6, TimeUnit.HOURS
-        ).build()
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED) // Requires internet
-            .build()
-
-        val cropAnalysisWorkRequest = PeriodicWorkRequestBuilder<CropAnalysisWorker>(2, TimeUnit.SECONDS) // Runs every 12 hours
+            2, TimeUnit.SECONDS // Repeat every 6 hours
+        )
             .setConstraints(constraints)
             .build()
 
         WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             "CropAnalysisWorker",
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.KEEP, // Avoid overwriting existing tasks
             workRequest
         )
     }
+
     override fun onPause() {
         super.onPause()
         finish()
     }
-
 }

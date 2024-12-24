@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="5dp">
 
     <!-- Title -->
     <TextView
@@ -14,7 +14,7 @@
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="@color/black"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:layout_marginStart="16dp" />
 
     <!-- Crops RecyclerView -->

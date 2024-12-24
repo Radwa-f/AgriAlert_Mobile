@@ -46,5 +46,32 @@
         <item>Turmeric</item>
     </string-array>
 
+    <string-array name="crop_harvest_times">
+        <item>October-November</item> <!-- Rice -->
+        <item>March-April</item> <!-- Wheat -->
+        <item>July-August</item> <!-- Maize -->
+        <item>July-August</item> <!-- Millets -->
+        <item>June-July</item> <!-- Bajra -->
+        <item>August-September</item> <!-- Pulses -->
+        <item>November-December</item> <!-- Lentil -->
+        <item>July-August</item> <!-- Oilseeds -->
+        <item>August-September</item> <!-- Groundnut -->
+        <item>November-December</item> <!-- Sugarcane -->
+        <item>November-December</item> <!-- Sugar beet -->
+        <item>September-October</item> <!-- Cotton -->
+        <item>Throughout the year</item> <!-- Tea -->
+        <item>September-October</item> <!-- Coffee -->
+        <item>October-November</item> <!-- Cocoa -->
+        <item>Throughout the year</item> <!-- Rubber -->
+        <item>August-September</item> <!-- Jute -->
+        <item>June-July</item> <!-- Flax -->
+        <item>Throughout the year</item> <!-- Coconut -->
+        <item>Throughout the year</item> <!-- Oil-palm -->
+        <item>November-December</item> <!-- Clove -->
+        <item>December-January</item> <!-- Black Pepper -->
+        <item>September-October</item> <!-- Cardamom -->
+        <item>December-January</item> <!-- Turmeric -->
+    </string-array>
+
 
 </resources>

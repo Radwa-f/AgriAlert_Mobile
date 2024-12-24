@@ -19,7 +19,7 @@
             android:id="@+id/v_alert_status_indicator"
             android:layout_width="match_parent"
             android:layout_height="4dp"
-            android:background="@color/alert_high_severity"/>
+            android:background="@color/my_dark"/>
 
         <!-- Content Layout -->
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="30dp"
-                app:cardElevation="8dp"
+                app:cardElevation="4dp"
                 >
             <!-- Alert Icon -->
             <ImageView
@@ -96,7 +96,7 @@
                     android:id="@+id/tv_alert_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Frost Warning"
+                    android:text=""
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:textColor="@color/alert_title_text"
@@ -107,7 +107,7 @@
                     android:id="@+id/tv_alert_reason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Low Temperature"
+                    android:text=""
                     android:textSize="14sp"
                     android:textColor="@color/alert_reason_text"
                     android:layout_marginBottom="4dp"/>
@@ -117,7 +117,7 @@
                     android:id="@+id/tv_alert_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Protect your crops from frost."
+                    android:text=""
                     android:textSize="14sp"
                     android:textColor="@color/alert_description_text"/>
             </LinearLayout>
